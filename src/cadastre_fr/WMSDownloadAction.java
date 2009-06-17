@@ -18,8 +18,8 @@ public class WMSDownloadAction extends JosmAction {
     public WMSDownloadAction(String layerName) {
         super(layerName, "wmsmenu", tr("Download WMS tile from {0}",layerName), null, false);
     }
-    
-    public void actionPerformed(ActionEvent e) {		
+
+    public void actionPerformed(ActionEvent e) {
         DownloadWMSTask.download(getLayer());
     }
 

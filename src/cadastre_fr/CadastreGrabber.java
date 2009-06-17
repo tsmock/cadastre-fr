@@ -13,20 +13,21 @@ import javax.imageio.ImageIO;
 
 import org.openstreetmap.josm.Main;
 import org.openstreetmap.josm.data.coor.EastNorth;
+import org.openstreetmap.josm.io.OsmTransferException;
 import org.openstreetmap.josm.io.ProgressInputStream;
 
 public class CadastreGrabber {
 
     public static final double epsilon = 1e-11;
-    
+
     private CadastreInterface wmsInterface = new CadastreInterface(this);
     private String lastWMSLayerName = null;
-    
+
     CadastreGrabber() {
-        getWmsInterface().downloadCancelled = false;	    
+        getWmsInterface().downloadCancelled = false;
     }
-    
-    public GeorefImage grab(WMSLayer wmsLayer, EastNorth lambertMin, EastNorth lambertMax) throws IOException {
+
+    public GeorefImage grab(WMSLayer wmsLayer, EastNorth lambertMin, EastNorth lambertMax) throws IOException, OsmTransferException {
 
         try {
             URL url = null;
@@ -78,7 +79,7 @@ public class CadastreGrabber {
         return new URL(str.replace(" ", "%20"));
     }
 
-    private BufferedImage grab(URL url) throws IOException {
+    private BufferedImage grab(URL url) throws IOException, OsmTransferException {
         wmsInterface.urlConn = (HttpURLConnection)url.openConnection();
         wmsInterface.urlConn.setRequestMethod("GET");
         wmsInterface.setCookie();

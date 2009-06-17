@@ -1,4 +1,4 @@
-package cadastre_fr; 
+package cadastre_fr;
 
 import static org.openstreetmap.josm.tools.I18n.tr;
 
@@ -31,8 +31,8 @@ public class WMSAdjustAction extends MapMode implements
     private Mode mode = null;
 
     public WMSAdjustAction(MapFrame mapFrame) {
-        super(tr("Adjust WMS"), "adjustxywms", 
-                        tr("Adjust the position of the WMS layer (raster images only)"), mapFrame, 
+        super(tr("Adjust WMS"), "adjustxywms",
+                        tr("Adjust the position of the WMS layer (raster images only)"), mapFrame,
                         ImageProvider.getCursor("normal", "move"));
     }
 
@@ -56,10 +56,10 @@ public class WMSAdjustAction extends MapMode implements
         Main.map.mapView.removeMouseListener(this);
         Main.map.mapView.removeMouseMotionListener(this);
         if (rasterMoved && CacheControl.cacheEnabled) {
-            int reply = JOptionPane.showConfirmDialog(null, 
+            int reply = JOptionPane.showConfirmDialog(null,
                     "Save the changes in cache ?",
                     "Update cache",
-                    JOptionPane.YES_NO_OPTION);		    
+                    JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.OK_OPTION) {
                 saveModifiedLayers();
             }
@@ -109,29 +109,29 @@ public class WMSAdjustAction extends MapMode implements
             prevEastNorth = newEastNorth;
         }
     }
-    
+
     private void displace(EastNorth start, EastNorth end) {
         selectedLayer.displace(end.east()-start.east(), end.north()-start.north());
     }
-    
+
     private void resize(EastNorth newEastNorth) {
         double dPrev = prevEastNorth.distance(selectedLayer.getRasterCenter().east(), selectedLayer.getRasterCenter().north());
         double dNew = newEastNorth.distance(selectedLayer.getRasterCenter().east(), selectedLayer.getRasterCenter().north());
         selectedLayer.resize(1 - dNew/dPrev);
     }
-    
+
     private void rotate(EastNorth start, EastNorth end) {
         EastNorth pivot = selectedLayer.getRasterCenter();
         double startAngle = Math.atan2(start.east()-pivot.east(), start.north()-pivot.north());
         double endAngle = Math.atan2(end.east()-pivot.east(), end.north()-pivot.north());
         double rotationAngle = endAngle - startAngle;
-        selectedLayer.rotate(rotationAngle);              	    
+        selectedLayer.rotate(rotationAngle);
     }
 
     @Override public void mouseReleased(MouseEvent e) {
         //Main.map.mapView.repaint();
         Main.map.mapView.setCursor(Cursor.getDefaultCursor());
-        selectedImage = null;	
+        selectedImage = null;
         prevEastNorth = null;
         selectedLayer = null;
         mode = null;
@@ -146,7 +146,7 @@ public class WMSAdjustAction extends MapMode implements
 
     @Override public void mouseClicked(MouseEvent e) {
     }
-    
+
     private void saveModifiedLayers() {
         for (WMSLayer wmsLayer : modifiedLayers) {
             wmsLayer.saveNewCache();
