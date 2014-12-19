@@ -51,6 +51,7 @@ public class MenuActionNewLocation extends JosmAction {
         super(tr("Change location"), "cadastre_small", tr("Set a new location for the next request"), null, false, "cadastrefr/newlocation", true);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         WMSLayer wmsLayer = addNewLayer(new ArrayList<WMSLayer>());
         if (wmsLayer != null)
@@ -115,12 +116,11 @@ public class MenuActionNewLocation extends JosmAction {
             wmsLayer = new WMSLayer(location, codeCommune, zone);
             wmsLayer.setDepartement(codeDepartement);
             CadastrePlugin.addWMSLayer(wmsLayer);
-            System.out.println("Add new layer with Location:" + inputTown.getText());
+            Main.info("Add new layer with Location:" + inputTown.getText());
         } else if (existingLayers != null && existingLayers.size() > 0 && Main.map.mapView.getActiveLayer() instanceof WMSLayer) {
             wmsLayer = (WMSLayer)Main.map.mapView.getActiveLayer();
         }
 
         return wmsLayer;
     }
-
 }
