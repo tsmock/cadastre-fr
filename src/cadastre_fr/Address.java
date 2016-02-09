@@ -63,7 +63,6 @@ import org.openstreetmap.josm.tools.Pair;
 import org.openstreetmap.josm.tools.Shortcut;
 
 public class Address extends MapMode implements MouseListener, MouseMotionListener, ActionListener {
-    private static final long serialVersionUID = 1L;
 
     // perhaps make all these tags configurable in the future
     private String tagHighway = "highway";
@@ -113,8 +112,7 @@ public class Address extends MapMode implements MouseListener, MouseMotionListen
             Main.map.mapView.removeMouseListener(this);
         }
 //        dialog.setVisible(false);
-        // kill the window completely to fix an issue on some linux distro and
-        // full screen mode.
+        // kill the window completely to fix an issue on some linux distro and full screen mode.
         if(dialog != null)
         {
             dialog.dispose();
@@ -252,7 +250,6 @@ public class Address extends MapMode implements MouseListener, MouseMotionListen
             } catch (NumberFormatException en) {
                 Main.warn("Unable to parse house number \"" + inputNumber.getText() + "\"");
             }
-
         }
         cmds.add(new ChangePropertyCommand(osm, tagHouseNumber, inputNumber.getText()));
         addStreetNameOrRelation(osm, cmds);
@@ -535,7 +532,7 @@ public class Address extends MapMode implements MouseListener, MouseMotionListen
             dialog.setBounds(new Rectangle(
                     Integer.parseInt(b[0]),Integer.parseInt(b[1]),Integer.parseInt(b[2]),Integer.parseInt(b[3])));
         }
-}
+    }
 
     private void setSelectedWay(Way w) {
         this.selectedWay = w;
@@ -552,5 +549,4 @@ public class Address extends MapMode implements MouseListener, MouseMotionListen
         newSelection.add(osm);
         getCurrentDataSet().setSelected(osm);
     }
-
 }

@@ -564,5 +564,4 @@ public class CadastreInterface {
         downloadCanceled = true;
         lastWMSLayerName = null;
     }
-
 }
