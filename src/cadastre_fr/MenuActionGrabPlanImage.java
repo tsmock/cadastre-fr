@@ -1,4 +1,4 @@
-// License: GPL. v2 and later. Copyright 2008-2009 by Pieren <pieren3@gmail.com> and others
+// License: GPL. For details, see LICENSE file.
 package cadastre_fr;
 
 import static org.openstreetmap.josm.tools.I18n.marktr;
@@ -24,7 +24,7 @@ public class MenuActionGrabPlanImage extends JosmAction implements Runnable {
     private DownloadWMSPlanImage downloadWMSPlanImage;
     private WMSLayer wmsLayer;
     private RasterImageGeoreferencer rasterImageGeoreferencer;
-    
+
     public MenuActionGrabPlanImage() {
         super(tr(name), "cadastre_small", tr("Grab non-georeferenced image"), null, false, "cadastrefr/grabplanimage", true);
         rasterImageGeoreferencer = new RasterImageGeoreferencer();
