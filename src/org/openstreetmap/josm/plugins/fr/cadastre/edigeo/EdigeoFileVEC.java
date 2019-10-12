@@ -586,6 +586,7 @@ public class EdigeoFileVEC extends EdigeoLotFile<VecBlock<?>> {
                 }
             }
         }
+        toPurge.removeIf(x -> x.getDataSet() == null);
         if (!toPurge.isEmpty()) {
             PurgeCommand.build(toPurge, null).executeCommand();
         }
